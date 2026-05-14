@@ -100,16 +100,29 @@
       overflow: hidden;
     }
 
-    /* ambient glow behind phone */
-    .hero::before {
+    /* Full-bleed hero image */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('GymLift.png') center 40% / cover no-repeat;
+      z-index: 0;
+    }
+
+    /* Multi-layer dark overlay: keeps text legible, fades bottom into page bg */
+    .hero-bg::before {
       content: '';
       position: absolute;
-      top: 15%;
-      right: 5%;
-      width: 520px;
-      height: 520px;
-      background: radial-gradient(circle, rgba(197,255,0,0.055) 0%, transparent 65%);
-      pointer-events: none;
+      inset: 0;
+      background:
+        linear-gradient(to right, rgba(10,10,10,0.88) 40%, rgba(10,10,10,0.45) 100%),
+        linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.95) 100%);
+    }
+
+    /* Ensure hero content sits above the background */
+    .hero-content,
+    .phone-wrap {
+      position: relative;
+      z-index: 1;
     }
 
     .hero-badge {
@@ -564,7 +577,12 @@
         text-align:center;
         gap:56px;
       }
-      .hero::before { display:none; }
+      /* On mobile, gradient skews more opaque so text stays readable */
+      .hero-bg::before {
+        background:
+          linear-gradient(to bottom, rgba(10,10,10,0.6) 0%, rgba(10,10,10,0.97) 80%),
+          linear-gradient(to right, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.7) 100%);
+      }
       .hero-badge { margin:0 auto 28px; }
       .hero-sub   { max-width:100%; margin-left:auto; margin-right:auto; }
       .hero-actions { justify-content:center; }
@@ -604,6 +622,7 @@
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
+  <div class="hero-bg"></div>
   <div class="hero-content">
     <div class="hero-badge">
       <div class="badge-pulse"></div>
