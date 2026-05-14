@@ -37,12 +37,11 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Subtle noise grain overlay */
     body::after {
       content: '';
       position: fixed;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 9999;
     }
@@ -57,7 +56,7 @@
       justify-content: space-between;
       padding: 0 48px;
       height: 64px;
-      background: rgba(10,10,10,0.75);
+      background: rgba(10,10,10,0.78);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border-bottom: 1px solid var(--border);
@@ -80,7 +79,6 @@
       color: #000;
       font-size: 13px;
       font-weight: 700;
-      letter-spacing: 0.01em;
       padding: 8px 18px;
       border-radius: 50px;
       text-decoration: none;
@@ -94,36 +92,28 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
-      gap: 48px;
-      padding: 64px 80px 80px;
+      gap: 32px;
+      padding: 64px 80px 60px;
       position: relative;
       overflow: hidden;
     }
 
-    /* Full-bleed hero image */
     .hero-bg {
       position: absolute;
       inset: 0;
       background: url('GymLift.png') center 40% / cover no-repeat;
       z-index: 0;
     }
-
-    /* Multi-layer dark overlay: keeps text legible, fades bottom into page bg */
     .hero-bg::before {
       content: '';
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(to right, rgba(10,10,10,0.88) 40%, rgba(10,10,10,0.45) 100%),
-        linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.95) 100%);
+        linear-gradient(to right, rgba(10,10,10,0.92) 42%, rgba(10,10,10,0.40) 100%),
+        linear-gradient(to bottom, rgba(10,10,10,0.25) 0%, rgba(10,10,10,0.98) 100%);
     }
 
-    /* Ensure hero content sits above the background */
-    .hero-content,
-    .phone-wrap {
-      position: relative;
-      z-index: 1;
-    }
+    .hero-content { position: relative; z-index: 1; }
 
     .hero-badge {
       display: inline-flex;
@@ -151,13 +141,13 @@
 
     @keyframes pulseGlow {
       0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(197,255,0,0.5); }
-      50%      { opacity:0.6; box-shadow: 0 0 0 5px rgba(197,255,0,0); }
+      50%      { opacity:0.6; box-shadow: 0 0 0 6px rgba(197,255,0,0); }
     }
 
     .hero-headline {
       font-size: clamp(44px, 5.5vw, 76px);
       font-weight: 900;
-      line-height: 0.98;
+      line-height: 0.97;
       letter-spacing: -0.04em;
       margin-bottom: 22px;
     }
@@ -204,165 +194,30 @@
       letter-spacing: 0.05em;
     }
 
-    /* ─── PHONE MOCKUP ─── */
-    .phone-wrap {
+    /* ─── HERO PHONE IMAGE ─── */
+    .hero-phone-wrap {
+      position: relative;
+      z-index: 1;
       display: flex;
       justify-content: center;
-      align-items: center;
-      position: relative;
+      align-items: flex-end;
+      /* Push image slightly below center so it "bleeds" into the section below */
+      padding-top: 40px;
     }
 
-    .phone {
-      width: 248px;
-      height: 510px;
-      background: #0f0f0f;
-      border-radius: 46px;
-      border: 1.5px solid rgba(255,255,255,0.10);
-      position: relative;
-      overflow: hidden;
-      box-shadow:
-        0 0 0 0.5px rgba(255,255,255,0.04),
-        0 50px 100px rgba(0,0,0,0.9),
-        inset 0 0 0 1px rgba(255,255,255,0.03);
+    .hero-phone-img {
+      width: min(300px, 90%);
+      /* Subtle tilt for dynamism */
+      transform: rotate(2deg) translateY(10px);
+      filter: drop-shadow(0 40px 80px rgba(0,0,0,0.85))
+              drop-shadow(0 0 40px rgba(197,255,0,0.08));
+      transition: transform 0.4s ease, filter 0.4s ease;
     }
-
-    /* side buttons */
-    .phone::before {
-      content:'';
-      position:absolute;
-      left:-3px; top:100px;
-      width:3px; height:34px;
-      background: rgba(255,255,255,0.08);
-      border-radius:2px 0 0 2px;
-      box-shadow: 0 42px 0 rgba(255,255,255,0.08);
+    .hero-phone-img:hover {
+      transform: rotate(0deg) translateY(0px) scale(1.02);
+      filter: drop-shadow(0 50px 90px rgba(0,0,0,0.9))
+              drop-shadow(0 0 60px rgba(197,255,0,0.14));
     }
-    .phone::after {
-      content:'';
-      position:absolute;
-      right:-3px; top:130px;
-      width:3px; height:60px;
-      background: rgba(255,255,255,0.08);
-      border-radius:0 2px 2px 0;
-    }
-
-    .di {
-      position:absolute;
-      top:13px; left:50%;
-      transform:translateX(-50%);
-      width:84px; height:29px;
-      background:#000;
-      border-radius:20px;
-      z-index:10;
-    }
-
-    .screen {
-      padding: 58px 16px 16px;
-      height:100%;
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-    }
-
-    .sc-row { display:flex; justify-content:space-between; align-items:flex-start; }
-
-    .sc-label {
-      font-size:8px;
-      font-weight:700;
-      letter-spacing:0.12em;
-      text-transform:uppercase;
-      color:#555;
-      line-height:1;
-    }
-
-    .sc-timer {
-      font-size:26px;
-      font-weight:900;
-      letter-spacing:-0.04em;
-      font-variant-numeric:tabular-nums;
-      line-height:1;
-      margin-top:2px;
-    }
-
-    .sc-hr {
-      display:flex;
-      align-items:center;
-      gap:4px;
-      font-size:11px;
-      font-weight:800;
-      color:#FF453A;
-      line-height:1;
-    }
-
-    .sc-divider {
-      height:1px;
-      background:rgba(255,255,255,0.06);
-      margin:4px 0;
-    }
-
-    .sc-name {
-      font-size:17px;
-      font-weight:900;
-      letter-spacing:-0.02em;
-      line-height:1.1;
-    }
-
-    .sc-target {
-      font-size:11px;
-      font-weight:700;
-      color: var(--accent);
-      margin-top:1px;
-    }
-
-    .sc-dots {
-      display:flex;
-      gap:5px;
-      align-items:center;
-      margin:4px 0 2px;
-    }
-
-    .dot {
-      width:10px; height:10px;
-      border-radius:50%;
-      background: var(--accent);
-    }
-    .dot.o { background:#222; }
-
-    .sc-count {
-      font-size:8px;
-      font-weight:700;
-      letter-spacing:0.1em;
-      color:#444;
-      text-transform:uppercase;
-    }
-
-    .log-btn {
-      background: var(--accent);
-      color:#000;
-      font-size:12px;
-      font-weight:900;
-      letter-spacing:0.04em;
-      text-align:center;
-      padding:12px;
-      border-radius:12px;
-      margin-top:auto;
-    }
-
-    .sc-stats {
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:6px;
-      margin-top:4px;
-    }
-
-    .sc-stat {
-      background:#161616;
-      border:1px solid rgba(255,255,255,0.05);
-      border-radius:10px;
-      padding:10px;
-    }
-    .sc-stat-label { font-size:7px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#444; margin-bottom:3px; }
-    .sc-stat-val { font-size:15px; font-weight:900; letter-spacing:-0.02em; line-height:1; }
-    .sc-stat-sub { font-size:7px; color:#444; margin-top:2px; font-weight:600; }
 
     /* ─── STATS BAR ─── */
     .stats-bar {
@@ -474,6 +329,99 @@
       line-height:1.65;
     }
 
+    /* ─── APP SHOWCASE ─── */
+    .showcase {
+      padding: 100px 80px;
+      border-top: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* faint accent glow in background */
+    .showcase::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px; height: 500px;
+      background: radial-gradient(ellipse, rgba(197,255,0,0.04) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .showcase-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .showcase-devices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: flex-end;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .showcase-device {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .showcase-device img {
+      width: 100%;
+      max-width: 320px;
+      filter: drop-shadow(0 32px 64px rgba(0,0,0,0.8))
+              drop-shadow(0 0 32px rgba(197,255,0,0.06));
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+    .showcase-device img:hover {
+      transform: translateY(-6px) scale(1.015);
+      filter: drop-shadow(0 44px 80px rgba(0,0,0,0.85))
+              drop-shadow(0 0 50px rgba(197,255,0,0.12));
+    }
+
+    /* Watch image is wider — let it breathe more */
+    .showcase-device.watch img {
+      max-width: 380px;
+    }
+
+    .showcase-caption {
+      text-align: center;
+    }
+
+    .showcase-caption-title {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .showcase-caption-sub {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.55;
+      max-width: 280px;
+    }
+
+    .showcase-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(197,255,0,0.15);
+      border-radius: 50px;
+      padding: 4px 12px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
     /* ─── CTA ─── */
     .cta {
       padding:100px 80px;
@@ -500,12 +448,7 @@
       margin-bottom:18px;
     }
     .cta h2 em { color:var(--accent); font-style:normal; }
-
-    .cta p {
-      font-size:16px;
-      color:var(--text-2);
-      margin-bottom:40px;
-    }
+    .cta p { font-size:16px; color:var(--text-2); margin-bottom:40px; }
 
     /* ─── FOOTER ─── */
     footer {
@@ -518,22 +461,10 @@
       gap:16px;
     }
 
-    .footer-links {
-      display:flex;
-      gap:24px;
-    }
-    .footer-links a {
-      font-size:13px;
-      color:var(--text-2);
-      text-decoration:none;
-      transition:color 0.2s;
-    }
+    .footer-links { display:flex; gap:24px; }
+    .footer-links a { font-size:13px; color:var(--text-2); text-decoration:none; transition:color 0.2s; }
     .footer-links a:hover { color:var(--text); }
-
-    .footer-copy {
-      font-size:12px;
-      color:#333;
-    }
+    .footer-copy { font-size:12px; color:#333; }
 
     /* ─── REVEAL ANIMATIONS ─── */
     .r {
@@ -549,43 +480,51 @@
       transition:opacity 0.55s ease, transform 0.55s ease;
     }
     .rs.in > *:nth-child(1){ opacity:1;transform:none;transition-delay:.00s }
-    .rs.in > *:nth-child(2){ opacity:1;transform:none;transition-delay:.08s }
-    .rs.in > *:nth-child(3){ opacity:1;transform:none;transition-delay:.16s }
-    .rs.in > *:nth-child(4){ opacity:1;transform:none;transition-delay:.24s }
+    .rs.in > *:nth-child(2){ opacity:1;transform:none;transition-delay:.09s }
+    .rs.in > *:nth-child(3){ opacity:1;transform:none;transition-delay:.18s }
+    .rs.in > *:nth-child(4){ opacity:1;transform:none;transition-delay:.27s }
 
-    /* hero entrance */
-    .hero-content > * {
-      animation: up 0.75s both ease;
-    }
+    .hero-content > * { animation: up 0.75s both ease; }
     .hero-content > *:nth-child(1){animation-delay:.08s}
     .hero-content > *:nth-child(2){animation-delay:.18s}
     .hero-content > *:nth-child(3){animation-delay:.28s}
     .hero-content > *:nth-child(4){animation-delay:.38s}
 
-    .phone-wrap { animation: up 0.85s 0.25s both ease; }
+    .hero-phone-wrap { animation: up 0.9s 0.2s both ease; }
 
     @keyframes up {
-      from { opacity:0; transform:translateY(28px); }
+      from { opacity:0; transform:translateY(30px); }
       to   { opacity:1; transform:none; }
     }
 
+    /* The phone's own hover transform is relative — override the animation end state */
+    .hero-phone-wrap.in .hero-phone-img {
+      transform: rotate(2deg) translateY(10px);
+    }
+
     /* ─── RESPONSIVE ─── */
+    @media(max-width:1000px){
+      .showcase-devices { gap: 32px; }
+      .showcase-device.watch img { max-width: 300px; }
+    }
+
     @media(max-width:900px){
       .hero {
         grid-template-columns:1fr;
-        padding:100px 28px 64px;
+        padding:100px 28px 48px;
         text-align:center;
-        gap:56px;
+        gap:48px;
       }
-      /* On mobile, gradient skews more opaque so text stays readable */
       .hero-bg::before {
         background:
-          linear-gradient(to bottom, rgba(10,10,10,0.6) 0%, rgba(10,10,10,0.97) 80%),
-          linear-gradient(to right, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.7) 100%);
+          linear-gradient(to bottom, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.97) 75%),
+          rgba(10,10,10,0.5);
       }
-      .hero-badge { margin:0 auto 28px; }
-      .hero-sub   { max-width:100%; margin-left:auto; margin-right:auto; }
+      .hero-badge   { margin:0 auto 28px; }
+      .hero-sub     { max-width:100%; margin-left:auto; margin-right:auto; }
       .hero-actions { justify-content:center; }
+      .hero-phone-wrap { padding-top: 0; }
+      .hero-phone-img  { transform: none; width: min(260px, 75%); }
 
       .stats-bar   { grid-template-columns:1fr; }
       .stat-item   { border-right:none; border-bottom:1px solid var(--border); padding:40px 28px; }
@@ -593,6 +532,10 @@
 
       .features    { padding:80px 28px; }
       .grid        { grid-template-columns:1fr; }
+
+      .showcase    { padding:80px 28px; }
+      .showcase-devices { grid-template-columns:1fr; gap: 56px; max-width:400px; }
+      .showcase-device img, .showcase-device.watch img { max-width: 100%; }
 
       .cta { padding:80px 28px; }
 
@@ -623,6 +566,7 @@
 <!-- ═══ HERO ═══ -->
 <section class="hero">
   <div class="hero-bg"></div>
+
   <div class="hero-content">
     <div class="hero-badge">
       <div class="badge-pulse"></div>
@@ -650,57 +594,13 @@
     </div>
   </div>
 
-  <!-- CSS iPhone Mockup -->
-  <div class="phone-wrap">
-    <div class="phone">
-      <div class="di"></div>
-      <div class="screen">
-
-        <div class="sc-row">
-          <div>
-            <div class="sc-label">Active Session</div>
-            <div class="sc-timer" id="wt">24:13</div>
-          </div>
-          <div class="sc-hr">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="#FF453A">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-            </svg>
-            147
-          </div>
-        </div>
-
-        <div class="sc-divider"></div>
-
-        <div class="sc-label">Push Day</div>
-        <div class="sc-name">Bench Press</div>
-        <div class="sc-target">4×8 @ 185 lbs</div>
-
-        <div class="sc-dots">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot o"></div>
-        </div>
-        <div class="sc-count">3 / 4 sets</div>
-
-        <div class="log-btn">✓ &nbsp;LOG SET</div>
-
-        <div class="sc-divider"></div>
-
-        <div class="sc-stats">
-          <div class="sc-stat">
-            <div class="sc-stat-label">Volume</div>
-            <div class="sc-stat-val">8,340</div>
-            <div class="sc-stat-sub">lbs today</div>
-          </div>
-          <div class="sc-stat">
-            <div class="sc-stat-label">Next Up</div>
-            <div class="sc-stat-val" style="font-size:11px;line-height:1.3;margin-top:2px;">Shoulder<br>Press</div>
-          </div>
-        </div>
-
-      </div>
-    </div>
+  <!-- Real iPhone home screenshot -->
+  <div class="hero-phone-wrap">
+    <img
+      class="hero-phone-img"
+      src="iphone-home.png"
+      alt="RepLab home screen showing weekly activity, recent workouts, and featured plan"
+    >
   </div>
 </section>
 
@@ -774,6 +674,44 @@
   </div>
 </section>
 
+<!-- ═══ APP SHOWCASE ═══ -->
+<section class="showcase r">
+  <div class="showcase-header">
+    <div class="section-eyebrow">See it in action</div>
+    <h2 class="section-title" style="margin-bottom:0;">Your workout,<br>everywhere.</h2>
+  </div>
+
+  <div class="showcase-devices rs">
+
+    <!-- iPhone lift screen -->
+    <div class="showcase-device">
+      <img
+        src="iphone-lift.png"
+        alt="RepLab active workout screen on iPhone showing Dependent Curl with set tracking"
+      >
+      <div class="showcase-caption">
+        <div class="showcase-tag">iPhone</div>
+        <div class="showcase-caption-title">Full workout control</div>
+        <div class="showcase-caption-sub">Log sets, adjust weight, track rest timers, and auto-advance through every exercise in your plan.</div>
+      </div>
+    </div>
+
+    <!-- Apple Watch lift screen -->
+    <div class="showcase-device watch">
+      <img
+        src="watch-lift.png"
+        alt="RepLab workout screen on Apple Watch Ultra showing heart rate, exercise, and LOG SET button"
+      >
+      <div class="showcase-caption">
+        <div class="showcase-tag">Apple Watch</div>
+        <div class="showcase-caption-title">Log sets from your wrist</div>
+        <div class="showcase-caption-sub">Live heart rate, current exercise, set count, and one-tap logging — all on your wrist, no phone needed.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ═══ CTA ═══ -->
 <section class="cta r">
   <h2>Start tracking.<br><em>Stop guessing.</em></h2>
@@ -798,20 +736,10 @@
 </footer>
 
 <script>
-  // Scroll reveal
   const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); } });
-  }, { threshold: 0.12 });
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.1 });
   document.querySelectorAll('.r, .rs').forEach(el => io.observe(el));
-
-  // Live workout timer in mockup
-  let s = 13, m = 24;
-  const wt = document.getElementById('wt');
-  setInterval(() => {
-    s++;
-    if (s >= 60) { s = 0; m++; }
-    wt.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
-  }, 1000);
 </script>
 
 </body>
