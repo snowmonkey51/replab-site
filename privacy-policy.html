@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RepLab Privacy Policy — Your data stays on your device.">
+  <title>Privacy Policy — RepLab</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0A0A0A;
+      --surface: #111111;
+      --border:  rgba(255,255,255,0.06);
+      --accent:  #C5FF00;
+      --text:    #FFFFFF;
+      --text-2:  #888888;
+      --font:    -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* noise grain */
+    body::after {
+      content:'';
+      position:fixed;
+      inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events:none;
+      z-index:9999;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 19px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo em { color: var(--accent); font-style: normal; }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .back:hover { color: var(--text); }
+
+    /* ─── LAYOUT ─── */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 80px 40px 120px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(34px, 4vw, 52px);
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .meta {
+      font-size: 13px;
+      color: var(--text-2);
+      padding-bottom: 40px;
+      margin-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* summary box */
+    .summary {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 14px 14px 0;
+      padding: 22px 26px;
+      margin-bottom: 48px;
+    }
+    .summary p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.7;
+      margin: 0;
+    }
+    .summary strong { color: var(--text); }
+
+    /* sections */
+    .section {
+      padding-top: 44px;
+      margin-top: 44px;
+      border-top: 1px solid var(--border);
+    }
+    .section:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+    h2 {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+    p:last-child { margin-bottom: 0; }
+
+    ul {
+      margin: 6px 0 14px;
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    li {
+      font-size: 15px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.65;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    li strong { color: var(--text); font-weight: 700; }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+
+    strong { color: var(--text); }
+
+    /* contact block */
+    .contact-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 26px;
+      margin-top: 14px;
+      display: inline-block;
+    }
+    .contact-block .cl { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-2); margin-bottom: 6px; }
+    .contact-block a { font-size: 15px; font-weight: 700; color: var(--accent); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 32px 40px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-2);
+    }
+    footer a { color: var(--text-2); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+
+    @media(max-width:600px){
+      nav { padding: 0 20px; }
+      .container { padding: 60px 20px 80px; }
+      footer { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Rep<em>Lab</em></a>
+  <a href="index.html" class="back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 12H5M12 5l-7 7 7 7"/>
+    </svg>
+    Back to home
+  </a>
+</nav>
+
+<div class="container">
+
+  <div class="eyebrow">Legal</div>
+  <h1>Privacy Policy</h1>
+  <div class="meta">
+    Last updated: May 2026 &nbsp;·&nbsp; Applies to RepLab for iOS and Apple Watch
+  </div>
+
+  <div class="summary">
+    <p><strong>The short version:</strong> RepLab stores everything on your device. No accounts, no servers, no third-party analytics, no ads. Your health and workout data never leaves your phone.</p>
+  </div>
+
+  <!-- 1 -->
+  <div class="section">
+    <h2>1. Overview</h2>
+    <p>RepLab ("we," "our," or "the app") is a strength-training application developed by Bevsoft. We are committed to your privacy. This policy explains what data RepLab accesses, why it accesses it, how it is stored, and what your rights are.</p>
+    <p>RepLab does not operate any backend infrastructure. No data collected or generated by the app is transmitted to Bevsoft or any third party.</p>
+  </div>
+
+  <!-- 2 -->
+  <div class="section">
+    <h2>2. Data We Access</h2>
+    <p>RepLab accesses the following data on your device, solely to provide app functionality. All data remains on your device.</p>
+
+    <ul>
+      <li>
+        <strong>HealthKit — Heart Rate:</strong> Streamed live from your Apple Watch during active workouts. BPM readings are displayed in the app and saved as part of your session history in the Health app.
+      </li>
+      <li>
+        <strong>HealthKit — Active Energy Burned:</strong> An estimated calorie value is written to the Health app when you complete a workout. This credits your Apple Watch Move ring.
+      </li>
+      <li>
+        <strong>HealthKit — Workout Records:</strong> A "Traditional Strength Training" entry is saved to the Health app when you finish a workout. Cancelled workouts are never saved to HealthKit.
+      </li>
+      <li>
+        <strong>Workout Data (SwiftData):</strong> Your training plans, exercises, completed sets, weights, reps, and session history are stored locally on your device using Apple's SwiftData framework.
+      </li>
+    </ul>
+
+    <p>RepLab does not access your location, contacts, camera, microphone, photos, or any other device data.</p>
+  </div>
+
+  <!-- 3 -->
+  <div class="section">
+    <h2>3. How Your Data Is Stored</h2>
+    <p>Workout data is stored exclusively on your device using SwiftData. No data is sent to any external server, cloud database, or third-party service by RepLab.</p>
+    <p>If you have iCloud enabled, Apple may sync your device's SwiftData store across your personal devices via iCloud Drive. This sync is entirely managed by Apple and governed by <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple's Privacy Policy</a>. Bevsoft has no access to your iCloud data.</p>
+  </div>
+
+  <!-- 4 -->
+  <div class="section">
+    <h2>4. HealthKit Data</h2>
+    <p>RepLab requests permission to read and write specific HealthKit data types. We only access HealthKit data that is directly relevant to the workout you are actively performing or have completed.</p>
+    <p>HealthKit data accessed by RepLab is:</p>
+    <ul>
+      <li>Never shared with any third party</li>
+      <li>Never transmitted off your device by RepLab</li>
+      <li>Never used for advertising, profiling, or analytics</li>
+      <li>Never used for any purpose beyond displaying your workout stats and writing workout records</li>
+    </ul>
+    <p>You can review or revoke RepLab's HealthKit permissions at any time in <strong>Settings → Privacy &amp; Security → Health → RepLab</strong>.</p>
+  </div>
+
+  <!-- 5 -->
+  <div class="section">
+    <h2>5. No Account Required</h2>
+    <p>RepLab does not require you to create an account, sign in, provide an email address, or share any identifying information. The app is fully functional without any registration or login.</p>
+  </div>
+
+  <!-- 6 -->
+  <div class="section">
+    <h2>6. Analytics, Advertising &amp; Tracking</h2>
+    <p>RepLab contains:</p>
+    <ul>
+      <li>No third-party analytics SDKs (no Firebase, Amplitude, Mixpanel, or similar)</li>
+      <li>No advertising networks or ad SDKs</li>
+      <li>No crash reporting services that transmit data off-device</li>
+      <li>No behavioral tracking, fingerprinting, or cross-app tracking of any kind</li>
+    </ul>
+    <p>We do not participate in Apple's App Tracking Transparency framework because RepLab does not track users.</p>
+  </div>
+
+  <!-- 7 -->
+  <div class="section">
+    <h2>7. Data Sharing</h2>
+    <p>We do not sell, license, rent, trade, or otherwise share your personal data with any third party for any purpose. We have no backend infrastructure and receive no data from your device.</p>
+  </div>
+
+  <!-- 8 -->
+  <div class="section">
+    <h2>8. Data Deletion</h2>
+    <p>Because all data lives on your device, you are in full control of deletion:</p>
+    <ul>
+      <li><strong>Workout history and plans:</strong> Delete the RepLab app from your iPhone to remove all SwiftData records.</li>
+      <li><strong>HealthKit records:</strong> Open the <strong>Apple Health</strong> app, find any workout or data entry attributed to RepLab, and delete it directly.</li>
+    </ul>
+  </div>
+
+  <!-- 9 -->
+  <div class="section">
+    <h2>9. Children's Privacy</h2>
+    <p>RepLab is not directed at children under the age of 13 and does not knowingly collect personal information from children. If you believe a child has provided personal information through the app, please contact us and we will address it promptly.</p>
+  </div>
+
+  <!-- 10 -->
+  <div class="section">
+    <h2>10. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. The "Last updated" date at the top of this page reflects when the most recent changes were made. We encourage you to review this policy periodically. Continued use of the app after any changes constitutes your acceptance of the updated policy.</p>
+  </div>
+
+  <!-- 11 -->
+  <div class="section">
+    <h2>11. Contact</h2>
+    <p>If you have any questions, concerns, or requests regarding this Privacy Policy or RepLab's data practices, please reach out:</p>
+    <div class="contact-block">
+      <div class="cl">Email</div>
+      <a href="mailto:snowmonkey5@gmail.com">snowmonkey5@gmail.com</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <a href="index.html">← RepLab</a> &nbsp;&nbsp;·&nbsp;&nbsp; © 2026 Bevsoft. All rights reserved.
+</footer>
+
+</body>
+</html>
